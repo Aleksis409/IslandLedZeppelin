@@ -1,4 +1,6 @@
 package com.javarush.island.artemov.entity.lifeforms.fauna.predators;
 
-public interface Predators {
+import com.javarush.island.artemov.entity.lifeforms.LifeCycle;
+
+public interface Predators extends LifeCycle {
 }

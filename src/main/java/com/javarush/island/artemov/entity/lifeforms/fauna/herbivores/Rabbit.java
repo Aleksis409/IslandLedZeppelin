@@ -1,4 +1,10 @@
 package com.javarush.island.artemov.entity.lifeforms.fauna.herbivores;
 
-public class Rabbit {
+import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
+
+public class Rabbit extends Animal implements Herbivores {
+    protected Rabbit(String label, String name, Double weight, Integer maxPerCell, Integer maxSpeed,
+                     Double foodRequiredToSaturate, String image) {
+        super(label, name, weight, maxPerCell, maxSpeed, foodRequiredToSaturate, image);
+    }
 }

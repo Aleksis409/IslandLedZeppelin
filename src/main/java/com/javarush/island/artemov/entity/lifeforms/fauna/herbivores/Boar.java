@@ -1,6 +1,10 @@
 package com.javarush.island.artemov.entity.lifeforms.fauna.herbivores;
 
-import com.javarush.island.artemov.entity.lifeforms.fauna.Animals;
+import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
 
-public class Boar implements Animals, Herbivores {
+public class Boar extends Animal implements Herbivores {
+    protected Boar(String label, String name, Double weight, Integer maxPerCell, Integer maxSpeed,
+                   Double foodRequiredToSaturate, String image) {
+        super(label, name, weight, maxPerCell, maxSpeed, foodRequiredToSaturate, image);
+    }
 }

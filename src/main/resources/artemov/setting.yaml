@@ -1,0 +1,215 @@
+gameMapConfig:
+    width: 100
+    height: 20
+    initialFillPercentage: 20.0
+
+gameMapConsolePrint:
+    viewWidth: 10
+    viewHeight: 10
+    viewOffsetX: 0
+    viewOffsetY: 0
+
+lifeForms:
+    wolf:
+        label: "wolf"
+        name: "Волк"
+        weight: 50
+        maxPerCell: 30
+        maxSpeed: 3
+        foodToSaturate: 8
+        image: "🐺"
+        foodPreferences:
+            horse: 10
+            deer: 15
+            rabbit: 60
+            mouse: 80
+            goat: 60
+            sheep: 70
+            boar: 15
+            buffalo: 10
+            duck: 40
+
+    boa:
+        label: "boa"
+        name: "Удав"
+        weight: 15
+        maxPerCell: 30
+        maxSpeed: 1
+        foodToSaturate: 3
+        image: "🐍"
+        foodPreferences:
+            fox: 15
+            rabbit: 20
+            mouse: 40
+            duck: 10
+
+    fox:
+        label: "fox"
+        name: "Лиса"
+        weight: 8
+        maxPerCell: 30
+        maxSpeed: 2
+        foodToSaturate: 2
+        image: "🦊"
+        foodPreferences:
+            rabbit: 70
+            mouse: 90
+            duck: 60
+            caterpillar: 40
+
+    bear:
+        label: "bear"
+        name: "Медведь"
+        weight: 500
+        maxPerCell: 5
+        maxSpeed: 2
+        foodToSaturate: 80
+        image: "🐻"
+        foodPreferences:
+            boa: 80
+            horse: 40
+            deer: 80
+            rabbit: 80
+            mouse: 90
+            goat: 70
+            sheep: 70
+            boar: 50
+            buffalo: 20
+            duck: 10
+
+    eagle:
+        label: "eagle"
+        name: "Орел"
+        weight: 6
+        maxPerCell: 20
+        maxSpeed: 3
+        foodToSaturate: 1
+        image: "🦅"
+        foodPreferences:
+            fox: 10
+            rabbit: 90
+            mouse: 90
+            duck: 80
+
+    horse:
+        label: "horse"
+        name: "Лошадь"
+        weight: 400
+        maxPerCell: 20
+        maxSpeed: 4
+        foodToSaturate: 60
+        image: "🐎"
+        foodPreferences:
+            plant: 100
+
+    deer:
+        label: "deer"
+        name: "Олень"
+        weight: 300
+        maxPerCell: 20
+        maxSpeed: 4
+        foodToSaturate: 50
+        image: "🦌"
+        foodPreferences:
+            plant: 100
+
+    rabbit:
+        label: "rabbit"
+        name: "Кролик"
+        weight: 2
+        maxPerCell: 150
+        maxSpeed: 2
+        foodToSaturate: 0.45
+        image: "🐇"
+        foodPreferences:
+            plant: 100
+
+    mouse:
+        label: "mouse"
+        name: "Мышь"
+        weight: 0.05
+        maxPerCell: 500
+        maxSpeed: 1
+        foodToSaturate: 0.01
+        image: "🐁"
+        foodPreferences:
+            caterpillar: 90
+            plant: 100
+
+    goat:
+        label: "goat"
+        name: "Коза"
+        weight: 60
+        maxPerCell: 140
+        maxSpeed: 3
+        foodToSaturate: 10
+        image: "🐐"
+        foodPreferences:
+            plant: 100
+
+    sheep:
+        label: "sheep"
+        name: "Овца"
+        weight: 70
+        maxPerCell: 140
+        maxSpeed: 3
+        foodToSaturate: 15
+        image: "🐑"
+        foodPreferences:
+            plant: 100
+
+    boar:
+        label: "boar"
+        name: "Кабан"
+        weight: 400
+        maxPerCell: 50
+        maxSpeed: 2
+        foodToSaturate: 50
+        image: "🐗"
+        foodPreferences:
+            mouse: 50
+            caterpillar: 90
+            plant: 100
+
+    buffalo:
+        label: "buffalo"
+        name: "Буйвол"
+        weight: 700
+        maxPerCell: 10
+        maxSpeed: 3
+        foodToSaturate: 100
+        image: "🐃"
+        foodPreferences:
+            plant: 100
+
+    duck:
+        label: "duck"
+        name: "Утка"
+        weight: 1
+        maxPerCell: 200
+        maxSpeed: 4
+        foodToSaturate: 0.15
+        image: "🦆"
+        foodPreferences:
+            caterpillar: 90
+            plant: 100
+
+    caterpillar:
+        label: "caterpillar"
+        name: "Гусеница"
+        weight: 0.01
+        maxPerCell: 1000
+        maxSpeed: 0
+        foodToSaturate: 0
+        image: "🐛"
+        foodPreferences:
+            plant: 100
+
+    plant:
+        label: "plant"
+        name: "Растения"
+        weight: 1
+        maxPerCell: 200
+        maxSpeed: ~
+        foodToSaturate: ~
+        image: "🌿"
