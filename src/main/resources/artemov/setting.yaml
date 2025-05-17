@@ -1,0 +1,132 @@
+gameMap:
+    width: 100
+    height: 20
+
+lifeForms:
+    wolf:
+        name: "Волк"
+        weight: 50
+        maxPerCell: 30
+        maxSpeed: 3
+        foodToSaturate: 8
+        image: "🐺"
+
+    boa:
+        name: "Удав"
+        weight: 15
+        maxPerCell: 30
+        maxSpeed: 1
+        foodToSaturate: 3
+        image: "🐍"
+
+    fox:
+        name: "Лиса"
+        weight: 8
+        maxPerCell: 30
+        maxSpeed: 2
+        foodToSaturate: 2
+        image: "🦊"
+
+    bear:
+        name: "Медведь"
+        weight: 500
+        maxPerCell: 5
+        maxSpeed: 2
+        foodToSaturate: 80
+        image: "🐻"
+
+    eagle:
+        name: "Орел"
+        weight: 6
+        maxPerCell: 20
+        maxSpeed: 3
+        foodToSaturate: 1
+        image: "🦅"
+
+    horse:
+        name: "Лошадь"
+        weight: 400
+        maxPerCell: 20
+        maxSpeed: 4
+        foodToSaturate: 60
+        image: "🐎"
+
+    deer:
+        name: "Олень"
+        weight: 300
+        maxPerCell: 20
+        maxSpeed: 4
+        foodToSaturate: 50
+        image: "🦌"
+
+    rabbit:
+        name: "Кролик"
+        weight: 2
+        maxPerCell: 150
+        maxSpeed: 2
+        foodToSaturate: 0.45
+        image: "🐇"
+
+    mouse:
+        name: "Мышь"
+        weight: 0.05
+        maxPerCell: 500
+        maxSpeed: 1
+        foodToSaturate: 0.01
+        image: "🐁"
+
+    goat:
+        name: "Коза"
+        weight: 60
+        maxPerCell: 140
+        maxSpeed: 3
+        foodToSaturate: 10
+        image: "🐐"
+
+    sheep:
+        name: "Овца"
+        weight: 70
+        maxPerCell: 140
+        maxSpeed: 3
+        foodToSaturate: 15
+        image: "🐑"
+
+    boar:
+        name: "Кабан"
+        weight: 400
+        maxPerCell: 50
+        maxSpeed: 2
+        foodToSaturate: 50
+        image: "🐗"
+
+    buffalo:
+        name: "Буйвол"
+        weight: 700
+        maxPerCell: 10
+        maxSpeed: 3
+        foodToSaturate: 100
+        image: "🐃"
+
+    duck:
+        name: "Утка"
+        weight: 1
+        maxPerCell: 200
+        maxSpeed: 4
+        foodToSaturate: 0.15
+        image: "🦆"
+
+    caterpillar:
+        name: "Гусеница"
+        weight: 0.01
+        maxPerCell: 1000
+        maxSpeed: 0
+        foodToSaturate: 0
+        image: "🐛"
+
+    plants:
+        name: "Растения"
+        weight: 1
+        maxPerCell: 200
+        maxSpeed: ~
+        foodToSaturate: ~
+        image: "🌿"

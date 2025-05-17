@@ -1,11 +1,11 @@
-package com.javarush.island.artemov.entity.lifeforms.flora;
+package com.javarush.island.artemov.entity.lifeforms.fauna;
 
 import com.javarush.island.artemov.entity.lifeforms.LifeCycle;
 import com.javarush.island.artemov.entity.lifeforms.LifeForfm;
 
-public class Plants extends LifeForfm implements LifeCycle {
+public abstract class Animal extends LifeForfm implements LifeCycle {
 
-    protected Plants(String name, Double weight, Integer maxPerCell, Integer maxSpeed, Double foodRequiredToSaturate,
+    protected Animal(String name, Double weight, Integer maxPerCell, Integer maxSpeed, Double foodRequiredToSaturate,
                      String image) {
         super(name, weight, maxPerCell, maxSpeed, foodRequiredToSaturate, image);
     }
