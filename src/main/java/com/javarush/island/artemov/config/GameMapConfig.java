@@ -1,18 +1,19 @@
 package com.javarush.island.artemov.config;
 
+import lombok.Getter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameMapConfig {
-
     private int width;
     private int height;
+    private double initialFillPercentage;
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    public double getInitialFillPercentage() {
+        if (initialFillPercentage < 1 || initialFillPercentage > 100) {
+            throw new IllegalArgumentException("initialFillPercentage должен быть от 1 до 100");
+        }
+        return initialFillPercentage / 100.0;
     }
 }

@@ -1,6 +1,9 @@
 gameMap:
     width: 100
     height: 20
+    initialFillPercentage: 1.0
+    initialPredatorPercentage: 1.0
+    initialHerbivoresPercentage: 1.0
 
 lifeForms:
     wolf:

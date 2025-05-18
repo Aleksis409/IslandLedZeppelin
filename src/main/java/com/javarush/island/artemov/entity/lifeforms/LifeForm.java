@@ -1,6 +1,9 @@
 package com.javarush.island.artemov.entity.lifeforms;
 
-public abstract class LifeForfm {
+import lombok.Getter;
+
+public abstract class LifeForm {
+    @Getter
     protected final String name;
     protected final Double weight;
     protected final Integer maxPerCell;
@@ -11,8 +14,8 @@ public abstract class LifeForfm {
     protected double currentSaturation = 0;
     protected boolean isAlive = true;
 
-    protected LifeForfm(String name, Double weight, Integer maxPerCell, Integer maxSpeed, Double foodRequiredToSaturate,
-                        String image) {
+    protected LifeForm(String name, Double weight, Integer maxPerCell, Integer maxSpeed, Double foodRequiredToSaturate,
+                       String image) {
         this.name = name;
         this.weight = weight;
         this.maxPerCell = maxPerCell;

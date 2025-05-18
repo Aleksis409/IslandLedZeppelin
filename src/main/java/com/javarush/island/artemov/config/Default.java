@@ -14,7 +14,7 @@ public class Default {
     };
 
     public static final Class<?>[] LIFE_FORM_CLASS_TYPES = {
-            Bear.class, Boar.class,Plants.class,
+            Bear.class, Boar.class, Plants.class,
     };
 
 //    public static final Class<?>[] LIFE_FORM_CLASS_TYPES = {

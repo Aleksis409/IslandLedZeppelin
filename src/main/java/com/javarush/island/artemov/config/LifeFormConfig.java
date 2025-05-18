@@ -1,7 +1,9 @@
 package com.javarush.island.artemov.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
 
+@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LifeFormConfig {
     private String name;
@@ -10,28 +12,4 @@ public class LifeFormConfig {
     private Integer maxSpeed;
     private Double foodToSaturate;
     private String image;
-
-    public String getName() {
-        return name;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public Integer getMaxPerCell() {
-        return maxPerCell;
-    }
-
-    public Integer getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public Double getFoodToSaturate() {
-        return foodToSaturate;
-    }
-
-    public String getImage() {
-        return image;
-    }
 }

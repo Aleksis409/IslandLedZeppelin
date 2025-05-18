@@ -1,9 +1,9 @@
 package com.javarush.island.artemov.entity.lifeforms.fauna;
 
 import com.javarush.island.artemov.entity.lifeforms.LifeCycle;
-import com.javarush.island.artemov.entity.lifeforms.LifeForfm;
+import com.javarush.island.artemov.entity.lifeforms.LifeForm;
 
-public abstract class Animal extends LifeForfm implements LifeCycle {
+public abstract class Animal extends LifeForm implements LifeCycle {
 
     protected Animal(String name, Double weight, Integer maxPerCell, Integer maxSpeed, Double foodRequiredToSaturate,
                      String image) {
