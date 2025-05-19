@@ -15,7 +15,7 @@ public class Location {
         this.y = y;
     }
 
-    public void addLifeForfm(LifeForm lifeForm) {
+    public void addLifeForm(LifeForm lifeForm) {
         lifeForms.add(lifeForm);
     }
 

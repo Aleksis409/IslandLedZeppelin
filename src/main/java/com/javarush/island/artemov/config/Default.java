@@ -1,9 +1,8 @@
 package com.javarush.island.artemov.config;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.javarush.island.artemov.entity.lifeforms.fauna.herbivores.*;
 import com.javarush.island.artemov.entity.lifeforms.fauna.predators.*;
-import com.javarush.island.artemov.entity.lifeforms.flora.Plants;
+import com.javarush.island.artemov.entity.lifeforms.flora.Plant;
 
 public class Default {
     public static final String SETTING_YAML_FILE_PATH = "artemov/setting.yaml";
@@ -14,7 +13,7 @@ public class Default {
     };
 
     public static final Class<?>[] LIFE_FORM_CLASS_TYPES = {
-            Bear.class, Boar.class, Plants.class,
+            Bear.class, Boar.class, Plant.class,
     };
 
 //    public static final Class<?>[] LIFE_FORM_CLASS_TYPES = {

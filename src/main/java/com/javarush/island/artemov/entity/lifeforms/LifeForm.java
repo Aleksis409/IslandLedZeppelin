@@ -2,8 +2,9 @@ package com.javarush.island.artemov.entity.lifeforms;
 
 import lombok.Getter;
 
-public abstract class LifeForm {
-    @Getter
+@Getter
+public abstract class LifeForm implements Cloneable {
+
     protected final String name;
     protected final Double weight;
     protected final Integer maxPerCell;
@@ -22,5 +23,10 @@ public abstract class LifeForm {
         this.maxSpeed = maxSpeed;
         this.foodRequiredToSaturate = foodRequiredToSaturate;
         this.image = image;
+    }
+
+    @Override
+    public LifeForm clone() throws CloneNotSupportedException {
+        return (LifeForm) super.clone();
     }
 }
