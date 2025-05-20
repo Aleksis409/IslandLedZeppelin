@@ -13,21 +13,22 @@ import java.util.*;
 import java.util.List;
 
 public class GameInitializer {
+    RandomSelection randomSelection = new RandomSelection();
 
-    public static GameMap initialGameMap() {
+    public GameMap initialGameMap() {
         GameMap gameMap = createEmptyGameMapFromYaml();
         generateInitialMapState(gameMap);
         return gameMap;
     }
 
-    private static GameMap createEmptyGameMapFromYaml() {
+    private GameMap createEmptyGameMapFromYaml() {
         GameMapConfig settings = ConfigManager.getSettings().getGameMap();
         int width = settings.getWidth();
         int height = settings.getHeight();
         return new GameMap(width, height);
     }
 
-    private static void generateInitialMapState(GameMap gameMap) {
+    private void generateInitialMapState(GameMap gameMap) {
         Map<String, LifeForm> lifeFormMap = initializeLifeFormsMap();
         List<String> lifeFormKeys = new ArrayList<>(lifeFormMap.keySet());
         Random random = new Random();
@@ -35,24 +36,24 @@ public class GameInitializer {
         List<Point> randomCells = getRandomCoordinates(gameMap);
 
         for (Point point : randomCells) {
-            Location cell = gameMap.getLocation(point.x, point.y);  // получаем локацию по координатам
+            Location cell = gameMap.getLocation(point.x, point.y);
 
             int count = 1 + random.nextInt(lifeFormKeys.size());
-            Set<String> selectedTypes = RandomSelection.getRandomTypes(lifeFormKeys, count);
+            Set<String> selectedTypes = randomSelection.getRandomTypes(lifeFormKeys, count);
 
             for (String type : selectedTypes) {
                 LifeForm prototype = lifeFormMap.get(type);
-                int amount = 1 + random.nextInt(prototype.getMaxPerCell()); // от 1 до maxPerCell включительно
+                int amount = 1 + random.nextInt(prototype.getMaxPerCell());
 
                 for (int i = 0; i < amount; i++) {
-                    LifeForm instance = cloneLifeForm(prototype); // создать копию
+                    LifeForm instance = cloneLifeForm(prototype);
                     cell.addLifeForm(instance);
                 }
             }
         }
     }
 
-    private static LifeForm cloneLifeForm(LifeForm original) {
+    private LifeForm cloneLifeForm(LifeForm original) {
         try {
             return original.clone();
         } catch (CloneNotSupportedException e) {
@@ -60,7 +61,7 @@ public class GameInitializer {
         }
     }
 
-    private static List<Point> getRandomCoordinates(GameMap gameMap) {
+    private List<Point> getRandomCoordinates(GameMap gameMap) {
         GameMapConfig settings = ConfigManager.getSettings().getGameMap();
         int totalCell = gameMap.getWidth() * gameMap.getHeight();
         double initialFillPercentage = settings.getInitialFillPercentage();
@@ -78,7 +79,7 @@ public class GameInitializer {
     }
 
 
-    private static Map<String, LifeForm> initializeLifeFormsMap() {
+    private Map<String, LifeForm> initializeLifeFormsMap() {
         Map<String, LifeFormConfig> settingsMap = ConfigManager.getSettings().getLifeForms();
         Map<String, LifeForm> lifeFormMap = new HashMap<>();
 
@@ -90,7 +91,7 @@ public class GameInitializer {
         return lifeFormMap;
     }
 
-    private static Optional<LifeForm> createLifeForm(Class<?> clazz, Map<String, LifeFormConfig> settingsMap) {
+    private Optional<LifeForm> createLifeForm(Class<?> clazz, Map<String, LifeFormConfig> settingsMap) {
         try {
             String key = clazz.getSimpleName().toLowerCase();
             LifeFormConfig config = settingsMap.get(key);
@@ -109,7 +110,7 @@ public class GameInitializer {
         }
     }
 
-    private static LifeForm getLifeForm(Class<?> clazz, LifeFormConfig config) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+    private LifeForm getLifeForm(Class<?> clazz, LifeFormConfig config) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         Constructor<?> constructor = clazz.getDeclaredConstructor(
                 String.class, Double.class, Integer.class, Integer.class, Double.class, String.class
         );

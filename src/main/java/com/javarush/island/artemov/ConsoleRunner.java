@@ -8,7 +8,8 @@ import com.javarush.island.artemov.service.GameInitializer;
 
 public class ConsoleRunner {
     public static void main(String[] args) throws Exception {
+        GameInitializer game = new GameInitializer();
         ConfigManager.loadSettings();
-        GameMap gameMap = GameInitializer.initialGameMap();
+        GameMap gameMap = game.initialGameMap();
     }
 }
