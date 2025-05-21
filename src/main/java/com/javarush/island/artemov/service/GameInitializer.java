@@ -13,6 +13,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.List;
 
+import static com.javarush.island.artemov.config.Default.LIFE_FORM_CLASS_TYPES;
+
 public class GameInitializer {
     RandomSelection randomSelection = new RandomSelection();
 
@@ -84,7 +86,7 @@ public class GameInitializer {
         Map<String, LifeFormConfig> settingsMap = ConfigManager.getSettings().getLifeForms();
         Map<String, LifeForm> lifeFormMap = new HashMap<>();
 
-        for (Class<?> clazz : Default.LIFE_FORM_CLASS_TYPES) {
+        for (Class<?> clazz : LIFE_FORM_CLASS_TYPES) {
             createLifeForm(clazz, settingsMap).ifPresent(lifeForm ->
                     lifeFormMap.put(lifeForm.getName(), lifeForm)
             );
@@ -153,10 +155,15 @@ public class GameInitializer {
                 int chance = entry.getValue();
 
                 // Получаем класс по имени
-                Class<?> foodClass = Class.forName("your.package.model." + className);
-                if (LifeForm.class.isAssignableFrom(foodClass)) {
-                    // Добавляем в preferences
-                    animal.getFoodPreferences().put((Class<? extends LifeForm>) foodClass, chance);
+                Optional<Class<? extends LifeForm>> foodClassOpt = Arrays.stream(LIFE_FORM_CLASS_TYPES)
+                        .filter(c -> c.getSimpleName().equals(className))
+                        .findFirst()
+                        .map(c -> (Class<? extends LifeForm>) c);
+
+                if (foodClassOpt.isPresent()) {
+                    animal.getFoodPreferences().put(foodClassOpt.get(), chance);
+                } else {
+                    throw new ClassNotFoundException("Класс для еды не найден: " + className);
                 }
             }
         }
