@@ -2,6 +2,7 @@ package com.javarush.island.artemov.entity.lifeforms.flora;
 
 import com.javarush.island.artemov.entity.lifeforms.LifeCycle;
 import com.javarush.island.artemov.entity.lifeforms.LifeForm;
+import com.javarush.island.artemov.entity.map.Location;
 
 public class Plant extends LifeForm implements LifeCycle {
 
@@ -16,9 +17,10 @@ public class Plant extends LifeForm implements LifeCycle {
     }
 
     @Override
-    public void eat() {
+    public void eat(Location location) {
 
     }
+
 
     @Override
     public void reproduce() {

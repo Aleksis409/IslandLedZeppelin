@@ -3,6 +3,8 @@ package com.javarush.island.artemov.config;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 
+import java.util.Map;
+
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LifeFormConfig {
@@ -12,4 +14,5 @@ public class LifeFormConfig {
     private Integer maxSpeed;
     private Double foodToSaturate;
     private String image;
+    private Map<String, Integer> eats;
 }

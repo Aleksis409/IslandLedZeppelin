@@ -28,9 +28,9 @@ public class GameController {
         List<Callable<Void>> tasks = new ArrayList<>();
         for (int y = 0; y < gameMap.getHeight(); y++) {
             for (int x = 0; x < gameMap.getWidth(); x++) {
-                int finalX = x, finalY = y;
+                int currentX = x, currentY = y;
                 tasks.add(() -> {
-                    Location cell = gameMap.getLocation(finalX, finalY);
+                    Location cell = gameMap.getLocation(currentX, currentY);
                     synchronized (cell) {
                         factory.createTask().run(cell);
                     }

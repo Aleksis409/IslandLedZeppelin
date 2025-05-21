@@ -13,6 +13,16 @@ lifeForms:
         maxSpeed: 3
         foodToSaturate: 8
         image: "🐺"
+        eats:
+            horse: 10
+            deer: 15
+            rabbit: 60
+            mouse: 80
+            goat: 60
+            sheep: 70
+            boar: 15
+            buffalo: 10
+            duck: 40
 
     boa:
         name: "Удав"
@@ -21,6 +31,11 @@ lifeForms:
         maxSpeed: 1
         foodToSaturate: 3
         image: "🐍"
+        eats:
+            fox: 15
+            rabbit: 20
+            mouse: 40
+            duck: 10
 
     fox:
         name: "Лиса"
@@ -29,6 +44,11 @@ lifeForms:
         maxSpeed: 2
         foodToSaturate: 2
         image: "🦊"
+        eats:
+            rabbit: 70
+            mouse: 90
+            duck: 60
+            caterpillar: 40
 
     bear:
         name: "Медведь"
@@ -37,6 +57,17 @@ lifeForms:
         maxSpeed: 2
         foodToSaturate: 80
         image: "🐻"
+        eats:
+            boa: 80
+            horse: 40
+            deer: 80
+            rabbit: 80
+            mouse: 90
+            goat: 70
+            sheep: 70
+            boar: 50
+            buffalo: 20
+            duck: 10
 
     eagle:
         name: "Орел"
@@ -45,6 +76,11 @@ lifeForms:
         maxSpeed: 3
         foodToSaturate: 1
         image: "🦅"
+        eats:
+            fox: 10
+            rabbit: 90
+            mouse: 90
+            duck: 80
 
     horse:
         name: "Лошадь"
@@ -53,6 +89,8 @@ lifeForms:
         maxSpeed: 4
         foodToSaturate: 60
         image: "🐎"
+        eats:
+            plant: 100
 
     deer:
         name: "Олень"
@@ -61,6 +99,8 @@ lifeForms:
         maxSpeed: 4
         foodToSaturate: 50
         image: "🦌"
+        eats:
+            plant: 100
 
     rabbit:
         name: "Кролик"
@@ -69,6 +109,8 @@ lifeForms:
         maxSpeed: 2
         foodToSaturate: 0.45
         image: "🐇"
+        eats:
+            plant: 100
 
     mouse:
         name: "Мышь"
@@ -77,6 +119,9 @@ lifeForms:
         maxSpeed: 1
         foodToSaturate: 0.01
         image: "🐁"
+        eats:
+            caterpillar: 90
+            plant: 100
 
     goat:
         name: "Коза"
@@ -85,6 +130,8 @@ lifeForms:
         maxSpeed: 3
         foodToSaturate: 10
         image: "🐐"
+        eats:
+            plant: 100
 
     sheep:
         name: "Овца"
@@ -93,6 +140,8 @@ lifeForms:
         maxSpeed: 3
         foodToSaturate: 15
         image: "🐑"
+        eats:
+            plant: 100
 
     boar:
         name: "Кабан"
@@ -101,6 +150,10 @@ lifeForms:
         maxSpeed: 2
         foodToSaturate: 50
         image: "🐗"
+        eats:
+            mouse: 50
+            caterpillar: 90
+            plant: 100
 
     buffalo:
         name: "Буйвол"
@@ -109,6 +162,8 @@ lifeForms:
         maxSpeed: 3
         foodToSaturate: 100
         image: "🐃"
+        eats:
+            plant: 100
 
     duck:
         name: "Утка"
@@ -117,6 +172,9 @@ lifeForms:
         maxSpeed: 4
         foodToSaturate: 0.15
         image: "🦆"
+        eats:
+            caterpillar: 90
+            plant: 100
 
     caterpillar:
         name: "Гусеница"
@@ -125,6 +183,8 @@ lifeForms:
         maxSpeed: 0
         foodToSaturate: 0
         image: "🐛"
+        eats:
+            plant: 100
 
     plant:
         name: "Растения"

@@ -1,5 +1,7 @@
 package com.javarush.island.artemov.service;
 
+import com.javarush.island.artemov.entity.lifeforms.LifeForm;
+import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
 import com.javarush.island.artemov.entity.map.GameMap;
 
 public class EatingPhase implements TaskFactory {
@@ -11,13 +13,13 @@ public class EatingPhase implements TaskFactory {
 
     @Override
     public CellTask createTask() {
-//        return (location) -> {
-//            for (Creature creature : location.getCreatures()) {
-//                if (creature instanceof Animal animal) {
-//                    animal.eat(location);
-//                }
-//            }
-//        };
-        return null;
+        return (location) -> {
+            for (LifeForm lifeForm : location.getLifeForfm()) {
+                if (lifeForm instanceof Animal animal) {
+                    animal.eat(location);
+                }
+            }
+        };
     }
 }
+

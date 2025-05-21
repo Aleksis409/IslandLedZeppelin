@@ -2,6 +2,7 @@ package com.javarush.island.artemov.service;
 
 import com.javarush.island.artemov.config.*;
 import com.javarush.island.artemov.entity.lifeforms.LifeForm;
+import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
 import com.javarush.island.artemov.entity.map.GameMap;
 import com.javarush.island.artemov.entity.map.Location;
 import com.javarush.island.artemov.util.RandomSelection;
@@ -97,7 +98,7 @@ public class GameInitializer {
             LifeFormConfig config = settingsMap.get(key);
 
             if (config == null) {
-                System.err.println("⚠️ Нет конфигурации для класса: " + key);
+                System.err.println("Нет конфигурации для класса: " + key);
                 return Optional.empty();
             }
 
@@ -110,11 +111,32 @@ public class GameInitializer {
         }
     }
 
-    private LifeForm getLifeForm(Class<?> clazz, LifeFormConfig config) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+//    private LifeForm getLifeForm(Class<?> clazz, LifeFormConfig config) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+//        Constructor<?> constructor = clazz.getDeclaredConstructor(
+//                String.class, Double.class, Integer.class, Integer.class, Double.class, String.class
+//        );
+//        constructor.setAccessible(true);
+//        LifeForm instance = (LifeForm) constructor.newInstance(
+//                config.getName(),
+//                config.getWeight(),
+//                config.getMaxPerCell(),
+//                config.getMaxSpeed(),
+//                config.getFoodToSaturate(),
+//                config.getImage()
+//        );
+//        return instance;
+//    }
+
+    private LifeForm getLifeForm(Class<?> clazz, LifeFormConfig config)
+            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+
+        // 1. Ищем подходящий конструктор
         Constructor<?> constructor = clazz.getDeclaredConstructor(
                 String.class, Double.class, Integer.class, Integer.class, Double.class, String.class
         );
         constructor.setAccessible(true);
+
+        // 2. Создаем экземпляр
         LifeForm instance = (LifeForm) constructor.newInstance(
                 config.getName(),
                 config.getWeight(),
@@ -123,6 +145,27 @@ public class GameInitializer {
                 config.getFoodToSaturate(),
                 config.getImage()
         );
+
+        // 3. Если это Animal — устанавливаем foodPreferences
+        if (instance instanceof Animal animal && config.getEats() != null) {
+            for (Map.Entry<String, Integer> entry : config.getEats().entrySet()) {
+                String className = capitalize(entry.getKey()); // Например, "plant" → "Plant"
+                int chance = entry.getValue();
+
+                // Получаем класс по имени
+                Class<?> foodClass = Class.forName("your.package.model." + className);
+                if (LifeForm.class.isAssignableFrom(foodClass)) {
+                    // Добавляем в preferences
+                    animal.getFoodPreferences().put((Class<? extends LifeForm>) foodClass, chance);
+                }
+            }
+        }
+
         return instance;
+    }
+
+    private String capitalize(String str) {
+        if (str == null || str.isEmpty()) return str;
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 }
