@@ -31,4 +31,6 @@ public class Plant extends LifeForm implements LifeCycle {
     public void die() {
 
     }
+
+
 }

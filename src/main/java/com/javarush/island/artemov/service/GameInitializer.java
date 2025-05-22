@@ -8,6 +8,7 @@ import com.javarush.island.artemov.entity.map.Location;
 import com.javarush.island.artemov.util.RandomSelection;
 
 import java.awt.*;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -18,7 +19,8 @@ import static com.javarush.island.artemov.config.Default.LIFE_FORM_CLASS_TYPES;
 public class GameInitializer {
     RandomSelection randomSelection = new RandomSelection();
 
-    public GameMap initialGameMap() {
+    public GameMap initialGameMap() throws IOException {
+        ConfigManager.loadSettings();
         GameMap gameMap = createEmptyGameMapFromYaml();
         generateInitialMapState(gameMap);
         return gameMap;

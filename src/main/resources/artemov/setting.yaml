@@ -1,6 +1,6 @@
 gameMap:
-    width: 5
-    height: 3
+    width: 3
+    height: 2
     initialFillPercentage: 50.0
     initialPredatorPercentage: 1.0
     initialHerbivoresPercentage: 1.0

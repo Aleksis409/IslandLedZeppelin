@@ -1,5 +1,6 @@
 package com.javarush.island.artemov.service;
 
+import com.javarush.island.artemov.config.GameMapConfig;
 import com.javarush.island.artemov.entity.map.GameMap;
 import com.javarush.island.artemov.entity.map.Location;
 
@@ -9,10 +10,12 @@ import java.util.concurrent.*;
 
 public class GameController {
     private final GameMap gameMap;
+    private final GameMapConfig config;
     private final ExecutorService executor;
 
-   public GameController(GameMap gameMap) {
+    public GameController(GameMap gameMap, GameMapConfig config) {
         this.gameMap = gameMap;
+        this.config = config;
         this.executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     }
 

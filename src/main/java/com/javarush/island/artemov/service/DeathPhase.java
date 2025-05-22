@@ -1,5 +1,7 @@
 package com.javarush.island.artemov.service;
 
+import com.javarush.island.artemov.entity.lifeforms.LifeForm;
+import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
 import com.javarush.island.artemov.entity.map.GameMap;
 
 public class DeathPhase implements TaskFactory {
@@ -11,8 +13,12 @@ public class DeathPhase implements TaskFactory {
 
     @Override
     public CellTask createTask() {
-        return location -> {
-            location.getLifeForms().removeIf(lifeForm -> !lifeForm.isAlive());
+        return (location) -> {
+            for (LifeForm lifeForm : location.getLifeForms()) {
+                if (lifeForm instanceof Animal animal) {
+                    animal.die();
+                }
+            }
         };
     }
 }

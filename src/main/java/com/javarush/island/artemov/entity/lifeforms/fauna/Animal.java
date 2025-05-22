@@ -7,6 +7,8 @@ import com.javarush.island.artemov.entity.map.Location;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static com.javarush.island.artemov.config.Default.STARVATION_WEIGHT_LOSS_PERCENT;
+
 public abstract class Animal extends LifeForm implements LifeCycle {
     protected Map<String, Integer>foodPreferences = new HashMap<>();
 
@@ -40,10 +42,10 @@ public abstract class Animal extends LifeForm implements LifeCycle {
 
             boolean success = ThreadLocalRandom.current().nextInt(100) < chance;
             if (success) {
-                double foodGained = Math.min(target.getWeight(), foodRequiredToSaturate - currentSaturation);
+                double foodGained = Math.min(target.getBaseWeight(), foodRequiredToSaturate - currentSaturation);
                 currentSaturation += foodGained;
 
-                if (foodGained >= target.getWeight()) {
+                if (foodGained >= target.getBaseWeight()) {
                     target.setAlive(false);
                 }
 
@@ -59,6 +61,18 @@ public abstract class Animal extends LifeForm implements LifeCycle {
 
     @Override
     public void die() {
+        if (!isAlive) return;
 
+        if (currentSaturation < foodRequiredToSaturate) {
+            double weightLoss = currentWeight * STARVATION_WEIGHT_LOSS_PERCENT;
+            currentWeight -= weightLoss;
+
+            if (currentWeight <= 0) {
+                currentWeight = 0;
+                isAlive = false;
+            }
+        }
+
+        currentSaturation = 0;
     }
 }
