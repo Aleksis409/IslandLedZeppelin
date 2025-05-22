@@ -113,22 +113,6 @@ public class GameInitializer {
         }
     }
 
-//    private LifeForm getLifeForm(Class<?> clazz, LifeFormConfig config) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-//        Constructor<?> constructor = clazz.getDeclaredConstructor(
-//                String.class, Double.class, Integer.class, Integer.class, Double.class, String.class
-//        );
-//        constructor.setAccessible(true);
-//        LifeForm instance = (LifeForm) constructor.newInstance(
-//                config.getName(),
-//                config.getWeight(),
-//                config.getMaxPerCell(),
-//                config.getMaxSpeed(),
-//                config.getFoodToSaturate(),
-//                config.getImage()
-//        );
-//        return instance;
-//    }
-
     private LifeForm getLifeForm(Class<?> clazz, LifeFormConfig config)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
 
@@ -151,20 +135,8 @@ public class GameInitializer {
         // 3. Если это Animal — устанавливаем foodPreferences
         if (instance instanceof Animal animal && config.getEats() != null) {
             for (Map.Entry<String, Integer> entry : config.getEats().entrySet()) {
-                String className = capitalize(entry.getKey()); // Например, "plant" → "Plant"
-                int chance = entry.getValue();
-
-                // Получаем класс по имени
-                Optional<Class<? extends LifeForm>> foodClassOpt = Arrays.stream(LIFE_FORM_CLASS_TYPES)
-                        .filter(c -> c.getSimpleName().equals(className))
-                        .findFirst()
-                        .map(c -> (Class<? extends LifeForm>) c);
-
-                if (foodClassOpt.isPresent()) {
-                    animal.getFoodPreferences().put(foodClassOpt.get(), chance);
-                } else {
-                    throw new ClassNotFoundException("Класс для еды не найден: " + className);
-                }
+                String className = capitalize(entry.getKey()); // "rabbit" → "Rabbit"
+                animal.getFoodPreferences().put(className, entry.getValue());
             }
         }
 

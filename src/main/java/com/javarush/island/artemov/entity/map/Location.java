@@ -19,7 +19,7 @@ public class Location {
         lifeForms.add(lifeForm);
     }
 
-    public List<LifeForm> getLifeForfm() {
+    public List<LifeForm> getLifeForms() {
         return lifeForms;
     }
 }

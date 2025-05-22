@@ -15,7 +15,7 @@ public class ConsoleRunner {
 
         GameController controller = new GameController(gameMap);
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 50; i++) {
             controller.runSimulationStep();
             Thread.sleep(100); // задержка между шагами
         }

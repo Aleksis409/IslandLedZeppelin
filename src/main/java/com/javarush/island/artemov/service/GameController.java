@@ -18,10 +18,11 @@ public class GameController {
 
     public void runSimulationStep() throws InterruptedException {
         runPhase(new EatingPhase(gameMap));
-        runPhase(new MovementPhase(gameMap));
-        runPhase(new ReproductionPhase(gameMap));
+//        runPhase(new MovementPhase(gameMap));
+//        runPhase(new ReproductionPhase(gameMap));
         runPhase(new DeathPhase(gameMap));
         runPhase(new StatisticsPhase(gameMap));
+        StatisticsPhase.printStatistics();
     }
 
     private void runPhase(TaskFactory factory) throws InterruptedException {

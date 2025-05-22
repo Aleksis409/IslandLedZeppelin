@@ -14,7 +14,7 @@ public class EatingPhase implements TaskFactory {
     @Override
     public CellTask createTask() {
         return (location) -> {
-            for (LifeForm lifeForm : location.getLifeForfm()) {
+            for (LifeForm lifeForm : location.getLifeForms()) {
                 if (lifeForm instanceof Animal animal) {
                     animal.eat(location);
                 }

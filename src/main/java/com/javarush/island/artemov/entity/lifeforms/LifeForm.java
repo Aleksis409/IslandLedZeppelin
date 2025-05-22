@@ -1,6 +1,7 @@
 package com.javarush.island.artemov.entity.lifeforms;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public abstract class LifeForm implements Cloneable {
@@ -11,8 +12,9 @@ public abstract class LifeForm implements Cloneable {
     protected final Integer maxSpeed;
     protected final Double foodRequiredToSaturate;
     protected final String image;
-
+    @Setter
     protected double currentSaturation = 0;
+    @Setter
     protected boolean isAlive = true;
 
     protected LifeForm(String name, Double weight, Integer maxPerCell, Integer maxSpeed, Double foodRequiredToSaturate,
