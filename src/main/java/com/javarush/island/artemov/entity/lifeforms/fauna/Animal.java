@@ -55,8 +55,24 @@ public abstract class Animal extends LifeForm implements LifeCycle {
     }
 
     @Override
-    public void reproduce() {
+    public void reproduce(Location location) {
+        if (!isAlive() || currentSaturation < foodRequiredToSaturate) return;
 
+        long sameSpeciesCount = location.getLifeForms().stream()
+                .filter(lf -> lf.getClass().equals(this.getClass()) && lf.isAlive())
+                .count();
+
+        if (sameSpeciesCount < 2 || sameSpeciesCount >= getMaxPerCell()) return;
+
+        try {
+            Animal offspring = (Animal) this.clone();
+            offspring.setAlive(true);
+            offspring.setCurrentWeight(this.getBaseWeight());
+            offspring.setCurrentSaturation(0);
+            location.addLifeForm(offspring);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

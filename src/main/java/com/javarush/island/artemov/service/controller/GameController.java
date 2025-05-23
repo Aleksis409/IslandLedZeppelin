@@ -1,8 +1,15 @@
-package com.javarush.island.artemov.service;
+package com.javarush.island.artemov.service.controller;
 
 import com.javarush.island.artemov.config.GameMapConfig;
 import com.javarush.island.artemov.entity.map.GameMap;
 import com.javarush.island.artemov.entity.map.Location;
+import com.javarush.island.artemov.service.statistic.StatisticsPhase;
+import com.javarush.island.artemov.service.phase.DeathPhase;
+import com.javarush.island.artemov.service.phase.EatingPhase;
+import com.javarush.island.artemov.service.phase.PlantGrowthPhase;
+import com.javarush.island.artemov.service.phase.ReproductionPhase;
+import com.javarush.island.artemov.service.task.TaskFactory;
+import com.javarush.island.artemov.service.statistic.LifeStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,25 +19,27 @@ public class GameController {
     private final GameMap gameMap;
     private final GameMapConfig config;
     private final ExecutorService executor;
+    private final LifeStatistics lifeStatistics;
 
     public GameController(GameMap gameMap, GameMapConfig config) {
         this.gameMap = gameMap;
         this.config = config;
         this.executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        this.lifeStatistics = new LifeStatistics(); // создаём один экземпляр на всё время жизни симуляции
     }
 
     public void runSimulationStep() throws InterruptedException {
         runPhase(new EatingPhase(gameMap));
-        PlantGrowthPhase growthPhase = new PlantGrowthPhase(gameMap);
+        PlantGrowthPhase growthPhase = new PlantGrowthPhase(gameMap, lifeStatistics);
         runPhase(growthPhase);
-        // После роста — проверка, остались ли растения
         growthPhase.repopulateIfEmpty();
-//        runPhase(new MovementPhase(gameMap));
+        // runPhase(new MovementPhase(gameMap)); // при необходимости раскомментируй
         runPhase(new ReproductionPhase(gameMap));
         runPhase(new DeathPhase(gameMap));
-        StatisticsPhase.reset();
-        runPhase(new StatisticsPhase(gameMap));
-        StatisticsPhase.printStatistics();
+
+        lifeStatistics.reset(); // очищаем данные перед сбором новой статистики
+        runPhase(new StatisticsPhase(gameMap, lifeStatistics));
+        lifeStatistics.printToConsole(); // выводим статистику
     }
 
     private void runPhase(TaskFactory factory) throws InterruptedException {
@@ -47,19 +56,14 @@ public class GameController {
                 });
             }
         }
-        executor.invokeAll(tasks); // ждёт завершения всех задач
-    }
-
-    private void runSinglePhase(Runnable phase) {
-        Future<?> future = executor.submit(phase);
-        try {
-            future.get(); // ждём завершения статистики
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
+        executor.invokeAll(tasks);
     }
 
     public void shutdown() {
         executor.shutdown();
+    }
+
+    public LifeStatistics getLifeStatistics() {
+        return lifeStatistics;
     }
 }

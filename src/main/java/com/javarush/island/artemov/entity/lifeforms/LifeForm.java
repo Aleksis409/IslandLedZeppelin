@@ -1,5 +1,6 @@
 package com.javarush.island.artemov.entity.lifeforms;
 
+import com.javarush.island.artemov.entity.map.Location;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,4 +39,6 @@ public abstract class LifeForm implements Cloneable {
             throw new AssertionError("Cloning failed", e);
         }
     }
+
+    public abstract void reproduce(Location location);
 }

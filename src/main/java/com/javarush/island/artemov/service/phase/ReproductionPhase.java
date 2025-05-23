@@ -1,0 +1,33 @@
+package com.javarush.island.artemov.service.phase;
+
+import com.javarush.island.artemov.entity.lifeforms.LifeForm;
+import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
+import com.javarush.island.artemov.entity.map.GameMap;
+import com.javarush.island.artemov.service.task.CellTask;
+import com.javarush.island.artemov.service.task.TaskFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ReproductionPhase implements TaskFactory {
+    private final GameMap gameMap;
+
+    public ReproductionPhase(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    @Override
+    public CellTask createTask() {
+        return location -> {
+            synchronized (location) {
+                for (LifeForm lifeForm : location.getLifeForms()) {
+                    if (lifeForm instanceof Animal animal) {
+                        animal.reproduce(location);
+                    }
+                }
+            }
+        };
+    }
+}

@@ -31,7 +31,7 @@ public class Plant extends LifeForm implements LifeCycle {
 
 
     @Override
-    public void reproduce() {
+    public void reproduce(Location location) {
 
     }
 

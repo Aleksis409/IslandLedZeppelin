@@ -6,6 +6,6 @@ public interface LifeCycle {
     void move();
     void eat(Location location);
 
-    void reproduce();
+    void reproduce(Location location);
     void die();
 }

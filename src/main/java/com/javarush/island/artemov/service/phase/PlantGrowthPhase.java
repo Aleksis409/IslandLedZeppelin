@@ -1,9 +1,12 @@
-package com.javarush.island.artemov.service;
+package com.javarush.island.artemov.service.phase;
 
 import com.javarush.island.artemov.entity.lifeforms.LifeForm;
 import com.javarush.island.artemov.entity.lifeforms.flora.Plant;
 import com.javarush.island.artemov.entity.map.GameMap;
 import com.javarush.island.artemov.entity.map.Location;
+import com.javarush.island.artemov.service.task.CellTask;
+import com.javarush.island.artemov.service.task.TaskFactory;
+import com.javarush.island.artemov.service.statistic.LifeStatistics;
 import com.javarush.island.artemov.util.LifeFormUtils;
 
 import java.util.ArrayList;
@@ -15,9 +18,11 @@ import static com.javarush.island.artemov.config.Default.PLANT_GROWTH_PERCENT;
 
 public class PlantGrowthPhase implements TaskFactory {
     private final GameMap gameMap;
+    private final LifeStatistics statistics;
 
-    public PlantGrowthPhase(GameMap gameMap) {
+    public PlantGrowthPhase(GameMap gameMap, LifeStatistics statistics) {
         this.gameMap = gameMap;
+        this.statistics = statistics;
     }
 
     @Override
@@ -26,12 +31,10 @@ public class PlantGrowthPhase implements TaskFactory {
             synchronized (location) {
                 List<LifeForm> newPlants = new ArrayList<>();
 
-                // Текущее количество живых растений
                 long currentCount = location.getLifeForms().stream()
                         .filter(lf -> lf instanceof Plant && lf.isAlive())
                         .count();
 
-                // Берём один образец растения (предполагается, что они все одинаковые)
                 Optional<LifeForm> plantSampleOpt = location.getLifeForms().stream()
                         .filter(lf -> lf instanceof Plant)
                         .findAny();
@@ -43,7 +46,7 @@ public class PlantGrowthPhase implements TaskFactory {
                 for (LifeForm lifeForm : location.getLifeForms()) {
                     if (!(lifeForm instanceof Plant) || !lifeForm.isAlive()) continue;
 
-                    if (currentCount >= maxPerCell) break; // лимит достигнут
+                    if (currentCount >= maxPerCell) break;
 
                     if (ThreadLocalRandom.current().nextDouble() < PLANT_GROWTH_PERCENT) {
                         try {
@@ -51,7 +54,7 @@ public class PlantGrowthPhase implements TaskFactory {
                             clone.setAlive(true);
                             clone.setCurrentWeight(clone.getBaseWeight());
                             newPlants.add(clone);
-                            currentCount++; // увеличиваем счётчик
+                            currentCount++;
                         } catch (CloneNotSupportedException e) {
                             e.printStackTrace();
                         }
@@ -64,18 +67,17 @@ public class PlantGrowthPhase implements TaskFactory {
     }
 
     public void repopulateIfEmpty() {
-        int alivePlants = StatisticsPhase.getAliveCountByClass(Plant.class);
+        int alivePlants = statistics.getAliveCountByClass(Plant.class);
 
         if (alivePlants == 0) {
             int width = gameMap.getWidth();
             int height = gameMap.getHeight();
 
-            for (int i = 0; i < 100; i++) { // допустим, хотим посадить 100 растений
+            for (int i = 0; i < 100; i++) {
                 int x = ThreadLocalRandom.current().nextInt(width);
                 int y = ThreadLocalRandom.current().nextInt(height);
                 Location location = gameMap.getLocation(x, y);
 
-                // ищем образец растения
                 Optional<LifeForm> sampleOpt = location.getLifeForms().stream()
                         .filter(lf -> lf instanceof Plant)
                         .findAny();

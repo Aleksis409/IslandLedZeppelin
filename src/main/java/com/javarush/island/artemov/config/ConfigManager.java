@@ -5,21 +5,29 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
+import java.net.URL;
 
 public class ConfigManager {
     private static GameSettings instance;
 
     private ConfigManager() {}
 
-    public static void loadSettings() throws IOException {
+    public static void loadSettings() {
         if (instance == null) {
-            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            InputStream is = ConfigManager.class.getClassLoader()
-                    .getResourceAsStream(Default.SETTING_YAML_FILE_PATH);
-            if (is == null) {
-                throw new IllegalArgumentException("Не найден файл настроек");
+            String path = Default.SETTING_YAML_FILE_PATH;
+            URL resource = ConfigManager.class.getClassLoader().getResource(path);
+
+            if (resource == null) {
+                throw new IllegalArgumentException("Файл настроек не найден по пути: " + path);
             }
-            instance = mapper.readValue(is, GameSettings.class);
+
+            try (InputStream is = resource.openStream()) {
+                ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+                instance = mapper.readValue(is, GameSettings.class);
+            } catch (IOException e) {
+                throw new UncheckedIOException("Ошибка при загрузке файла настроек: " + path, e);
+            }
         }
     }
 

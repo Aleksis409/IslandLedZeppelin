@@ -12,6 +12,8 @@ import static com.javarush.island.artemov.config.Default.LIFE_FORM_CLASS_TYPES;
 
 public class LifeFormUtils {
 
+    private LifeFormUtils(){}
+
     // Проверка: можно ли добавить ещё одно существо данного класса в клетку
     public static boolean canAddMore(Location location, LifeForm sample) {
         long count = location.getLifeForms().stream()

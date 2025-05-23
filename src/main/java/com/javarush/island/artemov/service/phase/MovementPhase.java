@@ -1,6 +1,8 @@
-package com.javarush.island.artemov.service;
+package com.javarush.island.artemov.service.phase;
 
 import com.javarush.island.artemov.entity.map.GameMap;
+import com.javarush.island.artemov.service.task.CellTask;
+import com.javarush.island.artemov.service.task.TaskFactory;
 
 public class MovementPhase implements TaskFactory {
     private final GameMap gameMap;

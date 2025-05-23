@@ -1,4 +1,4 @@
-package com.javarush.island.artemov.service;
+package com.javarush.island.artemov.service.task;
 
 import com.javarush.island.artemov.entity.map.Location;
 

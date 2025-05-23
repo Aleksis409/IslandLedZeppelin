@@ -1,13 +1,15 @@
-package com.javarush.island.artemov.service;
+package com.javarush.island.artemov.service.phase;
 
 import com.javarush.island.artemov.entity.lifeforms.LifeForm;
 import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
 import com.javarush.island.artemov.entity.map.GameMap;
+import com.javarush.island.artemov.service.task.CellTask;
+import com.javarush.island.artemov.service.task.TaskFactory;
 
-public class EatingPhase implements TaskFactory {
+public class DeathPhase implements TaskFactory {
     private final GameMap gameMap;
 
-    public EatingPhase(GameMap gameMap) {
+    public DeathPhase(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
@@ -17,11 +19,10 @@ public class EatingPhase implements TaskFactory {
             synchronized (location) {
                 for (LifeForm lifeForm : location.getLifeForms()) {
                     if (lifeForm instanceof Animal animal) {
-                        animal.eat(location);
+                        animal.die();
                     }
                 }
             }
         };
     }
 }
-

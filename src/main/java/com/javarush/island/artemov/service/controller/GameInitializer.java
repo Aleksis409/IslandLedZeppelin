@@ -1,11 +1,10 @@
-package com.javarush.island.artemov.service;
+package com.javarush.island.artemov.service.controller;
 
 import com.javarush.island.artemov.config.*;
 import com.javarush.island.artemov.entity.lifeforms.LifeForm;
 import com.javarush.island.artemov.entity.lifeforms.fauna.Animal;
 import com.javarush.island.artemov.entity.map.GameMap;
 import com.javarush.island.artemov.entity.map.Location;
-import com.javarush.island.artemov.util.RandomSelection;
 
 import java.awt.*;
 import java.io.IOException;
@@ -17,7 +16,6 @@ import java.util.List;
 import static com.javarush.island.artemov.config.Default.LIFE_FORM_CLASS_TYPES;
 
 public class GameInitializer {
-    RandomSelection randomSelection = new RandomSelection();
 
     public GameMap initialGameMap() throws IOException {
         ConfigManager.loadSettings();
@@ -44,7 +42,7 @@ public class GameInitializer {
             Location cell = gameMap.getLocation(point.x, point.y);
 
             int count = 1 + random.nextInt(lifeFormKeys.size());
-//            Set<String> selectedTypes = randomSelection.getRandomTypes(lifeFormKeys, count);
+//            Set<String> selectedTypes = RandomSelection.getRandomTypes(lifeFormKeys, count);
             Set<String> selectedTypes = new HashSet<>();
             selectedTypes.add("Растения");
             selectedTypes.add("Лошадь");
