@@ -14,7 +14,6 @@ public class StatisticsPhase implements TaskFactory {
 
     public StatisticsPhase(GameMap gameMap) {
         this.gameMap = gameMap;
-        statistics.clear();
     }
 
     @Override
@@ -51,6 +50,21 @@ public class StatisticsPhase implements TaskFactory {
 
         System.out.printf("\nИтого живых существ: %d%n", totalAlive);
         System.out.printf("Суммарный вес живых существ: %.2f кг%n", totalAliveWeight);
+    }
+
+    public static int getTotalAlive() {
+        return statistics.values().stream().mapToInt(LifeFormCounter::getAlive).sum();
+    }
+
+    public static void reset() {
+        statistics.clear();
+    }
+
+    public static int getAliveCountByClass(Class<?> lifeFormClass) {
+        return statistics.entrySet().stream()
+                .filter(e -> e.getKey().contains(lifeFormClass.getSimpleName()))
+                .mapToInt(e -> e.getValue().getAlive())
+                .sum();
     }
 
     // Вспомогательный счётчик

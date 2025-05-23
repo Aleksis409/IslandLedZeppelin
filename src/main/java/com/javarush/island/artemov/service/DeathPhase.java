@@ -14,9 +14,11 @@ public class DeathPhase implements TaskFactory {
     @Override
     public CellTask createTask() {
         return (location) -> {
-            for (LifeForm lifeForm : location.getLifeForms()) {
-                if (lifeForm instanceof Animal animal) {
-                    animal.die();
+            synchronized (location) {
+                for (LifeForm lifeForm : location.getLifeForms()) {
+                    if (lifeForm instanceof Animal animal) {
+                        animal.die();
+                    }
                 }
             }
         };

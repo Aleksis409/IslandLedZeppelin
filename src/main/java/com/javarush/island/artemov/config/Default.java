@@ -7,6 +7,7 @@ import com.javarush.island.artemov.entity.lifeforms.flora.Plant;
 public class Default {
     public static final String SETTING_YAML_FILE_PATH = "artemov/setting.yaml";
     public static final Double STARVATION_WEIGHT_LOSS_PERCENT = 0.25;
+    public static final Double PLANT_GROWTH_PERCENT = 0.2;
     public static final String[] LIFE_FORM_NAMES = {
             "Wolf", "Boa", "Fox", "Bear", "Eagle",
             "Horse", "Deer", "Rabbit", "Mouse", "Goat", "Sheep", "Boar", "Buffalo", "Duck", "Caterpillar",

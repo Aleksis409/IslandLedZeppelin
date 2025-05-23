@@ -32,6 +32,10 @@ public abstract class LifeForm implements Cloneable {
 
     @Override
     public LifeForm clone() throws CloneNotSupportedException {
-        return (LifeForm) super.clone();
+        try {
+            return (LifeForm) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("Cloning failed", e);
+        }
     }
 }

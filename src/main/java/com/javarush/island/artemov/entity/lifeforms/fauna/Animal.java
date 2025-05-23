@@ -64,7 +64,7 @@ public abstract class Animal extends LifeForm implements LifeCycle {
         if (!isAlive) return;
 
         if (currentSaturation < foodRequiredToSaturate) {
-            double weightLoss = currentWeight * STARVATION_WEIGHT_LOSS_PERCENT;
+            double weightLoss = baseWeight * STARVATION_WEIGHT_LOSS_PERCENT;
             currentWeight -= weightLoss;
 
             if (currentWeight <= 0) {
@@ -72,7 +72,6 @@ public abstract class Animal extends LifeForm implements LifeCycle {
                 isAlive = false;
             }
         }
-
         currentSaturation = 0;
     }
 }

@@ -5,6 +5,7 @@ import com.javarush.island.artemov.config.GameMapConfig;
 import com.javarush.island.artemov.entity.map.GameMap;
 import com.javarush.island.artemov.service.GameController;
 import com.javarush.island.artemov.service.GameInitializer;
+import com.javarush.island.artemov.service.StatisticsPhase;
 
 
 public class ConsoleRunner {
@@ -19,6 +20,11 @@ public class ConsoleRunner {
         for (int i = 0; i < 100; i++) {
             controller.runSimulationStep();
             Thread.sleep(100); // задержка между шагами
+            if (StatisticsPhase.getTotalAlive() == 0) {
+                System.out.println("💀 Все существа умерли. Игра завершена.");
+                System.out.println("Количество циклов - " + i);
+                break;
+            }
         }
 
         controller.shutdown();

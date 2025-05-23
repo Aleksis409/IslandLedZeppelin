@@ -44,7 +44,11 @@ public class GameInitializer {
             Location cell = gameMap.getLocation(point.x, point.y);
 
             int count = 1 + random.nextInt(lifeFormKeys.size());
-            Set<String> selectedTypes = randomSelection.getRandomTypes(lifeFormKeys, count);
+//            Set<String> selectedTypes = randomSelection.getRandomTypes(lifeFormKeys, count);
+            Set<String> selectedTypes = new HashSet<>();
+            selectedTypes.add("Растения");
+            selectedTypes.add("Лошадь");
+            selectedTypes.add("Волк");
 
             for (String type : selectedTypes) {
                 LifeForm prototype = lifeFormMap.get(type);

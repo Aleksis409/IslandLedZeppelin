@@ -21,9 +21,14 @@ public class GameController {
 
     public void runSimulationStep() throws InterruptedException {
         runPhase(new EatingPhase(gameMap));
+        PlantGrowthPhase growthPhase = new PlantGrowthPhase(gameMap);
+        runPhase(growthPhase);
+        // После роста — проверка, остались ли растения
+        growthPhase.repopulateIfEmpty();
 //        runPhase(new MovementPhase(gameMap));
-//        runPhase(new ReproductionPhase(gameMap));
+        runPhase(new ReproductionPhase(gameMap));
         runPhase(new DeathPhase(gameMap));
+        StatisticsPhase.reset();
         runPhase(new StatisticsPhase(gameMap));
         StatisticsPhase.printStatistics();
     }
